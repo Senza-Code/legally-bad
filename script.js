@@ -1,13 +1,8 @@
-const fakeCursor = document.getElementById('fakeCursor');
-const screenW = window.innerWidth;
-const screenH = window.innerHeight;
+import { initCursor } from './modules/cursor.js';
 
-document.addEventListener('mousemove', (e) => {
-  const badX = screenW - e.clientX;
-  const badY = screenH - e.clientY;
-  fakeCursor.style.left = `${badX}px`;
-  fakeCursor.style.top = `${badY}px`;
-});
+initCursor();
+
+// DODGING BUTTON LOGIC
 const startBtn = document.getElementById("startBtn");
 
 startBtn.addEventListener("mousemove", () => {
@@ -22,6 +17,7 @@ startBtn.addEventListener("mousemove", () => {
   startBtn.style.top = `${randY}px`;
 });
 
+// OPTIONAL CHAOS POPUP
 setInterval(() => {
   alert("Nope. 😈");
-}, 15000); // every 15 seconds
+}, 15000);
