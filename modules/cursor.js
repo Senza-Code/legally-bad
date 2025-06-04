@@ -8,24 +8,22 @@ export function initCursor() {
   faker.id = 'faker';
   document.body.appendChild(faker);
 
-  // 3. Apply styles (HOT PINK RING ONLY)
-  Object.assign(faker.style, {
-    position: 'fixed',
-    width: '20px',
-    height: '20px',
-    border: '2px solid hotpink',
-    backgroundColor: 'transparent',
-    borderRadius: '50%',
-    pointerEvents: 'none',
-    transform: 'translate(-50%, -50%)',
-    transition: 'transform 40ms linear',
-    zIndex: 9999
-  });
+  // 3. Apply enforced styles (HOT PINK RING, no fill)
+  faker.style.setProperty('position', 'fixed');
+  faker.style.setProperty('width', '20px');
+  faker.style.setProperty('height', '20px');
+  faker.style.setProperty('border', '2px solid hotpink', 'important');
+  faker.style.setProperty('background-color', 'transparent', 'important');
+  faker.style.setProperty('border-radius', '50%');
+  faker.style.setProperty('pointer-events', 'none');
+  faker.style.setProperty('transform', 'translate(-50%, -50%)');
+  faker.style.setProperty('transition', 'transform 40ms linear');
+  faker.style.setProperty('z-index', '9999');
 
   // 4. Hide native cursor
   document.body.style.cursor = 'none';
 
-  // 5. Track position (reversed)
+  // 5. Track position (reversed movement)
   let x = window.innerWidth / 2;
   let y = window.innerHeight / 2;
 
@@ -43,7 +41,7 @@ export function initCursor() {
 
   window.addEventListener('pointermove', onMove);
 
-  // 6. ESC to restore
+  // 6. ESC to restore system cursor
   const onKey = (e) => {
     if (e.key === 'Escape') {
       faker.remove();
@@ -54,4 +52,7 @@ export function initCursor() {
   };
 
   window.addEventListener('keydown', onKey);
+
+  // 7. Optional debug log
+  console.log("✅ Custom cursor activated");
 }
