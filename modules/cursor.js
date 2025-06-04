@@ -1,35 +1,61 @@
 export function initCursor() {
-  // 1. Remove existing cursor if it exists
+  // 🔁 Remove any existing fake cursor
   let faker = document.getElementById('faker');
   if (faker) faker.remove();
 
-  // 2. Create a new fake cursor div
+  // 🎯 Create the fake cursor
   faker = document.createElement('div');
   faker.id = 'faker';
+  Object.assign(faker.style, {
+    position: 'fixed',
+    width: '12px',
+    height: '12px',
+    backgroundColor: 'black',
+    borderRadius: '50%',
+    pointerEvents: 'none',
+    transform: 'translate(-50%, -50%)',
+    transition: 'transform 40ms linear',
+    zIndex: 9999
+  });
   document.body.appendChild(faker);
 
-  // 3. Apply enforced styles (HOT PINK RING, no fill)
-  faker.style.setProperty('position', 'fixed');
-  faker.style.setProperty('width', '20px');
-  faker.style.setProperty('height', '20px');
-  faker.style.setProperty('border', '2px solid hotpink', 'important');
-  faker.style.setProperty('background-color', 'transparent', 'important');
-  faker.style.setProperty('border-radius', '50%');
-  faker.style.setProperty('pointer-events', 'none');
-  faker.style.setProperty('transform', 'translate(-50%, -50%)');
-  faker.style.setProperty('transition', 'transform 40ms linear');
-  faker.style.setProperty('z-index', '9999');
-
-  // 4. Hide native cursor
+  // 🧤 Hide native cursor
   document.body.style.cursor = 'none';
 
-  // 5. Track position (reversed movement)
+  // ✨ Trail Dot Function
+  function spawnTrailDot(x, y) {
+    const dot = document.createElement('div');
+    Object.assign(dot.style, {
+      position: 'fixed',
+      left: `${x}px`,
+      top: `${y}px`,
+      width: '6px',
+      height: '6px',
+      backgroundColor: 'black',
+      borderRadius: '50%',
+      pointerEvents: 'none',
+      zIndex: 9998,
+      opacity: '0.7',
+      transition: 'opacity 0.5s ease-out'
+    });
+    document.body.appendChild(dot);
+
+    setTimeout(() => {
+      dot.style.opacity = '0';
+      setTimeout(() => dot.remove(), 500);
+    }, 0);
+  }
+
+  // 🌀 Reverse + Glitchy movement logic
   let x = window.innerWidth / 2;
   let y = window.innerHeight / 2;
 
   const onMove = ({ movementX, movementY }) => {
-    x -= movementX;
-    y -= movementY;
+    const glitchX = (Math.random() - 0.5) * 10;
+    const glitchY = (Math.random() - 0.5) * 10;
+
+    x -= movementX + glitchX;
+    y -= movementY + glitchY;
 
     const w = faker.offsetWidth;
     const h = faker.offsetHeight;
@@ -37,11 +63,13 @@ export function initCursor() {
     y = Math.min(Math.max(0, y), window.innerHeight - h);
 
     faker.style.transform = `translate(${x}px, ${y}px)`;
+    spawnTrailDot(x, y);
   };
 
+  // 🎯 Event listeners
   window.addEventListener('pointermove', onMove);
 
-  // 6. ESC to restore system cursor
+  // ⛔ ESC to restore normal behavior
   const onKey = (e) => {
     if (e.key === 'Escape') {
       faker.remove();
@@ -50,9 +78,7 @@ export function initCursor() {
       window.removeEventListener('keydown', onKey);
     }
   };
-
   window.addEventListener('keydown', onKey);
 
-  // 7. Optional debug log
-  console.log("✅ Custom cursor activated");
+  console.log("✅ Reversed glitchy cursor activated with trail");
 }
