@@ -10,6 +10,7 @@ export function initCursor() {
       width: '16px',
       height: '16px',
       border: '2px solid hotpink',
+      background: 'transparent',
       borderRadius: '50%',
       pointerEvents: 'none',
       transform: 'translate(-50%, -50%)',
