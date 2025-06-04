@@ -28,3 +28,15 @@ p {
   pointer-events: none;
   z-index: 9999;
 }
+#startBtn {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  position: relative;
+  z-index: 2;
+}
