@@ -10,6 +10,8 @@ Built in 2 hours at *Bad Ideas Build Day with The Tech Bros*.
 
 Legally Bad is a parody web interface designed to go against everything we know about good UX. Created by **Pearl Sikepe** and **Elena Ajayi** during NY Tech Week, this project flips usability on its head — for fun, frustration, and experimental learning.
 
+🧵 Read the full story behind Legally Bad: [View the Threads post](https://www.threads.com/@senzathepearl/post/DKgI83qOsdH?xmt=AQF0KOhGCSS8ynw0hcNkxaqwZAo6IZOqKpq1mro_uL4jZg)
+
 ---
 
 ## 😵 What It Does (Badly)
